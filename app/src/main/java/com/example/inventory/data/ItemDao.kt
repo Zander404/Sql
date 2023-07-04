@@ -16,16 +16,25 @@
 package com.example.inventory.data
 
 import androidx.room.Dao
+import androidx.room.Database
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 /**
  * Database access object to access the Inventory database
  */
+
+@Database(entities = [ItemDao::class], version = 2)
+@TypeConverters(ItemRoomDatabase::class)
+abstract class ItemsDatabase : RoomDatabase() {
+    abstract fun itemDao(): ItemDao
+}
 @Dao
 interface ItemDao {
 
